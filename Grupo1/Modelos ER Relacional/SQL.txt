@@ -1,0 +1,90 @@
+CREATE TABLE correo(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    correo varchar(32) NOT NULL
+);
+CREATE TABLE telefono(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Numero Int NOT NULL
+);
+CREATE TABLE direccion(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    direccion varchar(32)
+);
+CREATE TABLE liceo(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nombre varchar(35) NOT NULL,
+    id_direccion int,
+    id_telefono int,
+    FOREIGN KEY (id_direccion) REFERENCES direccion(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
+);
+CREATE TABLE especialidad(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    especialida varchar(15) NOT NULL
+);
+CREATE TABLE profesor(
+    rut varchar(13) PRIMARY KEY NOT NULL,
+    nombre varchar(23) NOT NULL,
+    apellido varchar(23) NOT NULL,
+    id_liceo int,
+    id_correo int,
+    id_telefono int,
+    FOREIGN KEY (id_liceo) REFERENCES liceo(id),
+    FOREIGN KEY (id_correo) REFERENCES correo(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
+);
+CREATE TABLE EquipoDirecctivo(
+    rut varchar(13) PRIMARY KEY NOT NULL,
+    nombre varchar(15) NOT NULL,
+    apellido varchar(15) NOT NULL,
+    id_liceo int,
+    id_correo int,
+    id_telefono int,
+    FOREIGN KEY (id_liceo) REFERENCES liceo(id),
+    FOREIGN KEY (id_correo) REFERENCES correo(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
+);
+CREATE TABLE empresa(
+	id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_direccion int,
+    id_telefono int,
+    id_correo int,
+    FOREIGN KEY (id_direccion) REFERENCES direccion(id),
+    FOREIGN KEY (id_correo) REFERENCES correo(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
+);
+CREATE TABLE alumno(
+    rut varchar(13) PRIMARY KEY NOT NULL,
+    nombre varchar(15) NOT NULL,
+    id_liceo int,
+    sexo char NOT NULL,
+    edad int NOT NULL,
+    curso varchar(3),
+	id_telefono int,
+    id_correo int,
+    id_especialidad int,
+    id_liceo int,
+    FOREIGN KEY (id_liceo) REFERENCES liceo(id),
+    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id),
+    FOREIGN KEY (id_correo) REFERENCES correo(id),
+    FOREIGN KEY (id_telefono) REFERENCES telefono(id)
+);
+CREATE TABLE oferta(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    fecha date NOT NULL,
+    cupo int NOT NULL,
+    id_empresa int,
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id)
+);
+CREATE TABLE recibir(
+    rut_alumno varchar(13),
+    id_oferta int,
+    FOREIGN KEY (rut_alumno) REFERENCES alumno(rut),
+    FOREIGN KEY (id_oferta) REFERENCES oferta(id)
+);
+CREATE TABLE imparte(
+    id_especialidad int,
+    rut_profesor int,
+    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id),
+    FOREIGN KEY (rut_profesor) REFERENCES profesor(rut)
+);

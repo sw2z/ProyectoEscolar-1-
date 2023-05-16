@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form name="form" action="index.html">
+        <input name="user" type="text" placeholder="Usuario">
+        <input name="pass" type="password" placeholder="Contraseña">
+        <input onclick=login() type="button" value="acceder">
+    </form> 
+    <function>login() {
+        var usuario = document.form.user.value;
+        var contrasenia = document.for.pass.value;
+        console.log(Usuario + " " + contrasenia);
+        if(usuario == "alumno"&& contrasenia == "password"{
+            document.form.submit();
+        } else{
+            alert("usuario y/o contraseña no son validos")
+        }
+    }
+            
+    </function>
+</body>
+</html>
