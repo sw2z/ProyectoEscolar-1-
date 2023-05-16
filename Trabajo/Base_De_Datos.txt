@@ -1,9 +1,0 @@
-CREATE DATABASE test_2;
-Use test_2;
-
-CREATE TABLE usuarios (
-    nombre Varchar(40) not null,
-    numero int not null,
-    contraseña varchar(20) not null,
-    correo varchar(20) PRIMARY KEY not null
-);
